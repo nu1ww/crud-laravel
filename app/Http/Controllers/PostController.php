@@ -119,6 +119,7 @@ class PostController extends Controller
       $post->title=request('title');
       $post->body=request('body');
       $post->save();
+      //Set flash massage
       Session::flash('danger', 'Post was successful!');
       return redirect()->route('posts.show',$post->id);
        // session('')
