@@ -8,7 +8,7 @@
                 @foreach($posts as $row)
                     <h2>{{$row->title}}</h2>
                     <h5>{{$row->body}}</h5>
-                <a href="{{url('posts')}}/{{$row->id}}">Edit</a>
+                    <a href="{{url('posts')}}/{{$row->id}}">Edit</a>
                     <br>
                 @endforeach
             </div>

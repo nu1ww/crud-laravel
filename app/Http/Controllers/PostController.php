@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\SendEmailEvent;
+use App\Tag;
 use Illuminate\Support\Facades\Session;
 use Validator;
 use App\Post;
@@ -80,7 +81,11 @@ class PostController extends Controller
     public function show($id)
     {
         $data=Post::find($id);
-        return view('post.edit')->with('data',$data);
+        $tag=Tag::pluck('tag', 'id');
+       // dd($tag);
+        return view('post.edit')
+            ->with('tags',$tag)
+            ->with('data',$data);
     }
 
     /**

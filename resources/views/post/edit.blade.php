@@ -24,10 +24,8 @@
                                 @endif
                             @endforeach
                         </div> <!-- end .flash-message -->
-                    <form class="form-horizontal" method="POST" action="/posts/{{$data->id}}">
-                        <input name="_method" type="hidden" value="PUT">
 
-                        {{csrf_field()}}
+                        {{Form::open(['method'=>'PUT','url'=>'/posts/'.$data->id,'class'=>'form-horizontal'])}}
 
                         <br>
                         <div class="form-group">
@@ -40,6 +38,13 @@
                             <label class="control-label col-sm-2" for="description">Description</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" name="body">{{$data->body}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="description">Description</label>
+                            <div class="col-sm-3">
+                                {{Form::select('tag',$tags,null,['class'=>'form-control'])}}
                             </div>
                         </div>
 
