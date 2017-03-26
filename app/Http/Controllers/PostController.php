@@ -81,10 +81,8 @@ class PostController extends Controller
     public function show($id)
     {
         $data=Post::find($id);
-        $tag=Tag::pluck('tag', 'id');
-       // dd($tag);
-        return view('post.edit')
-            ->with('tags',$tag)
+
+        return view('post.show')
             ->with('data',$data);
     }
 
@@ -96,7 +94,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        return 'ok';
+        $data=Post::find($id);
+        $tag=Tag::pluck('tag', 'id');
+        // dd($tag);
+        return view('post.edit')
+            ->with('tags',$tag)
+            ->with('data',$data);
     }
 
     /**
@@ -108,8 +111,10 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        //dd($request);
         $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:posts|max:255',
+            'title' => 'required|max:255',
             'body' => 'required',
         ]);
 //form validation
@@ -120,10 +125,18 @@ class PostController extends Controller
                 ->withInput();
         }
 
+
+
+
       $post= Post::find($id);
       $post->title=request('title');
       $post->body=request('body');
       $post->save();
+      //dd($post);
+
+      $post= Post::find($id);
+      $post->tags()->attach(request('tag'));
+      $post->tags()->detach([1]);
       //Set flash massage
       Session::flash('danger', 'Post was successful!');
       return redirect()->route('posts.show',$post->id);

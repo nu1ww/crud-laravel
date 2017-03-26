@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="description">Description</label>
                             <div class="col-sm-3">
-                                {{Form::select('tag',$tags,null,['class'=>'form-control'])}}
+                                {{Form::select('tag[]',$tags,null,['class'=>'form-control','multiple' => true])}}
                             </div>
                         </div>
 
