@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TagController extends Controller
 {
@@ -11,9 +13,17 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Tag $tag)
     {
-        //
+        //return $tag;
+       // return $tag->posts();
+        //return (string)$tag->posts();
+        $data=$tag->posts;
+
+
+       // dd($data);
+
+         return view('post.index')->with('posts',$data);
     }
 
     /**

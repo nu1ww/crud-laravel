@@ -23,3 +23,5 @@ Route::get('/home', 'HomeController@index');
 // all post activities request handle
 Route::resource('posts','PostController');
 
+Route::get('posts/tags/{tag}','TagController@index');
+

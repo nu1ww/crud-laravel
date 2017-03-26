@@ -136,7 +136,7 @@ class PostController extends Controller
 
       $post= Post::find($id);
       $post->tags()->attach(request('tag'));
-      $post->tags()->detach([1]);
+      //$post->tags()->detach([1]);
       //Set flash massage
       Session::flash('danger', 'Post was successful!');
       return redirect()->route('posts.show',$post->id);
